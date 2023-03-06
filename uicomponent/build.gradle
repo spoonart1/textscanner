@@ -4,13 +4,12 @@ plugins {
 }
 
 android {
-    namespace 'com.spoonart.textscanner.ui_component'
+    namespace 'com.spoonart.uicomponent'
     compileSdk 33
     defaultConfig {
         minSdk 21
         targetSdk 33
     }
-
     buildFeatures {
         compose true
     }
@@ -27,13 +26,6 @@ android {
 }
 
 dependencies {
-
-    implementation 'com.google.android.gms:play-services-location:19.0.0'
-    implementation "androidx.lifecycle:lifecycle-service:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
-    implementation "androidx.compose.runtime:runtime-livedata:$compose_ui_version"
-    implementation "androidx.activity:activity-compose:$activity_compose_version"
-
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

@@ -14,6 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "TextScanner"
 include ':app'
-include ':ui-component'
 include ':feature-textscanner'
 include ':common-utility'
+include ':uicomponent'

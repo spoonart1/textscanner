@@ -1,2 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.spoonart.feature_textscanner"/>
+<manifest package="com.spoonart.feature_textscanner"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+
+        <activity android:name=".ui.TextScannerActivity"
+            android:screenOrientation="portrait"/>
+        <meta-data
+            android:name="com.google.mlkit.vision.DEPENDENCIES"
+            android:value="ocr" />
+
+        <service android:name="com.spoonart.common_utility.location.PowerfulLocationService"
+            android:enabled="true"
+            android:exported="true"/>
+
+        <provider
+            android:name=".screen.imagepicker.ComposeFileProvider"
+            android:authorities="com.spoonart.textscanner.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+    </application>
+
+</manifest>
