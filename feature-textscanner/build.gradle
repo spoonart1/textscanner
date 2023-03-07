@@ -4,7 +4,6 @@ plugins {
     id 'com.android.library'
     id 'com.google.dagger.hilt.android'
 }
-
 android {
     namespace 'com.spoonart.feature_textscanner'
     compileSdk 33
@@ -41,9 +40,14 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     implementation 'androidx.activity:activity-compose:1.3.1'
+    implementation "androidx.compose.runtime:runtime-livedata:$compose_ui_version"
     implementation "androidx.compose.ui:ui:$compose_ui_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_ui_version"
     implementation 'androidx.compose.material:material:1.1.1'
+
+    //map
+    implementation 'com.google.android.gms:play-services-maps:18.0.0'
+    implementation 'com.google.maps:google-maps-services:0.18.0'
 
     //di hilt
     implementation "com.google.dagger:dagger:$dagger_version"

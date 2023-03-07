@@ -15,7 +15,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat
 
-@RequiresApi(Build.VERSION_CODES.KITKAT)
 @Composable
 fun AskPermission(
     onGranted: (@Composable () -> Unit)? = null,
@@ -24,7 +23,6 @@ fun AskPermission(
         android.Manifest.permission.READ_EXTERNAL_STORAGE,
         android.Manifest.permission.CAMERA,
         android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        android.Manifest.permission.MANAGE_DOCUMENTS,
         android.Manifest.permission.ACCESS_COARSE_LOCATION,
         android.Manifest.permission.ACCESS_FINE_LOCATION
     )

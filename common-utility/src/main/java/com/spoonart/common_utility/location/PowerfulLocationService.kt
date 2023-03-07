@@ -14,11 +14,9 @@ import android.os.IBinder
 import android.os.Looper
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
@@ -30,15 +28,15 @@ import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
-import com.spoonart.textscanner.ui_component.R
+import com.spoonart.common_utility.R
 
 @Composable
-fun LocationComposable(onUpdate:(Location)->Unit){
+fun LocationComposable(onUpdate: (Location) -> Unit) {
 
     val context = LocalContext.current
     val locationLiveData = remember { MutableLiveData<Location>() }
-    val serviceConnection = remember{
-        object : ServiceConnection{
+    val serviceConnection = remember {
+        object : ServiceConnection {
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
                 val binder = service as PowerfulLocationService.MyBinder
                 binder.getService().locationLiveData.observeForever {
@@ -53,10 +51,9 @@ fun LocationComposable(onUpdate:(Location)->Unit){
         }
     }
 
-    DisposableEffect(serviceConnection){
-     val intent = Intent(context, PowerfulLocationService::class.java)
+    DisposableEffect(serviceConnection) {
+        val intent = Intent(context, PowerfulLocationService::class.java)
         context.bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
-
         ContextCompat.startForegroundService(context, intent)
         onDispose {
             context.unbindService(serviceConnection)
@@ -68,15 +65,15 @@ fun LocationComposable(onUpdate:(Location)->Unit){
     location?.let { onUpdate(it) }
 }
 
-class PowerfulLocationService : LifecycleService(){
+class PowerfulLocationService : LifecycleService() {
     private val _locationLiveData = MutableLiveData<Location>()
-    val locationLiveData:LiveData<Location> = _locationLiveData
+    val locationLiveData: LiveData<Location> = _locationLiveData
 
     private val locationRequest = LocationRequest.create()
         .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
         .setInterval(5000)
 
-    private lateinit var fusedLocationClient:FusedLocationProviderClient
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var callback: LocationCallback
 
     override fun onCreate() {
@@ -90,11 +87,12 @@ class PowerfulLocationService : LifecycleService(){
         return MyBinder()
     }
 
-    private fun startForeground(){
+    private fun startForeground() {
         val channelId = "mychannelid"
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelName = "My Channel"
-            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
+            val channel =
+                NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(channel)
         }
@@ -125,8 +123,8 @@ class PowerfulLocationService : LifecycleService(){
         }
     }
 
-    inner class MyBinder : Binder(){
-        fun getService():PowerfulLocationService{
+    inner class MyBinder : Binder() {
+        fun getService(): PowerfulLocationService {
             return this@PowerfulLocationService
         }
     }

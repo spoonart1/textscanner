@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.spoonart.textscanner.ui_component'
+    namespace 'com.spoonart.common_utility'
     compileSdk 33
     defaultConfig {
         minSdk 21

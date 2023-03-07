@@ -14,7 +14,7 @@ interface TextAnalyzer {
         context: Context,
         fromFile: Uri? = null,
         fromBitmap: Bitmap? = null,
-        onSuccess: (String) -> Unit,
+        onSuccess: (List<String>) -> Unit,
         onFailure: (String) -> Unit,
     )
 }
@@ -29,8 +29,8 @@ class TextAnalyzerImpl @Inject constructor() : TextAnalyzer {
         context: Context,
         fromFile: Uri?,
         fromBitmap: Bitmap?,
-        onSuccess: (String) -> Unit,
-        onFailure: (String) -> Unit,
+        onSuccess: (List<String>) -> Unit,
+        onFailure: (String) -> Unit
     ) {
         try {
             val image = getImage(context, fromFile, fromBitmap)
@@ -39,7 +39,8 @@ class TextAnalyzerImpl @Inject constructor() : TextAnalyzer {
                     if (visionText.textBlocks.isEmpty()) {
                         onFailure("Please use another image or recapture under the best light")
                     } else {
-                        onSuccess(visionText.textBlocks.first().text)
+                        val texts = visionText.textBlocks.map { it.text }
+                        onSuccess(texts)
                     }
                 }
                 .addOnFailureListener { e ->
