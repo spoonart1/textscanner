@@ -8,9 +8,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.maps.model.LatLng
+import com.spoonart.feature_textscanner.data.PrettyDisplay
 import com.spoonart.feature_textscanner.data.ResultData
 import com.spoonart.feature_textscanner.utils.DistanceUtils
 import com.spoonart.feature_textscanner.utils.TextAnalyzer
+import com.spoonart.remote_database.RemoteDatabase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,6 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TextScannerViewModel @Inject constructor(
     private val textAnalyzer: TextAnalyzer,
+    private val remoteDatabase: RemoteDatabase
 ) : ViewModel() {
 
     private val _stateProgress = MutableLiveData<LoadingState>(LoadingState.Nothing)
@@ -65,7 +68,10 @@ class TextScannerViewModel @Inject constructor(
                         ResultData(
                             uri = uri,
                             texts = texts,
-                            it
+                            display = PrettyDisplay(
+                                distance = DistanceUtils.prettyDistance(it.distanceInMeters),
+                                duration = DistanceUtils.prettyDuration(it.durationInSeconds)
+                            )
                         )
                     )
                 }
