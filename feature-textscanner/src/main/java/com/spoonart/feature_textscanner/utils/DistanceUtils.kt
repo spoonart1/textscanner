@@ -1,16 +1,15 @@
 package com.spoonart.feature_textscanner.utils
 
-import android.util.TimeUtils
 import com.google.maps.DirectionsApi
 import com.google.maps.GeoApiContext
 import com.google.maps.model.LatLng
 import com.google.maps.model.TravelMode
-import java.text.SimpleDateFormat
-import java.util.concurrent.TimeUnit
 
 object DistanceUtils{
 
     private val destination = LatLng(-6.193798350458681, 106.82197691048982)
+
+    //hide with ndk
     private val apiKey = "AIzaSyAmjIJ8VeFgRG1OHaJ0InTW3RQphdVGcas"
 
     fun request(

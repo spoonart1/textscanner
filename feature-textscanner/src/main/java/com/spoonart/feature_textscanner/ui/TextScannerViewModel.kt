@@ -11,6 +11,7 @@ import com.google.maps.model.LatLng
 import com.spoonart.feature_textscanner.data.PrettyDisplay
 import com.spoonart.feature_textscanner.data.ResultData
 import com.spoonart.feature_textscanner.utils.DistanceUtils
+import com.spoonart.feature_textscanner.utils.LocationUtils
 import com.spoonart.feature_textscanner.utils.TextAnalyzer
 import com.spoonart.remote_database.RemoteDatabase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,7 +41,7 @@ class TextScannerViewModel @Inject constructor(
                 context = context,
                 fromFile = uri,
                 onSuccess = {
-                    calculateDistance(uri, it, location)
+                    calculateDistance(context, uri, it, location)
                 },
                 onFailure = {
                     _error.postValue(it)
@@ -54,6 +55,7 @@ class TextScannerViewModel @Inject constructor(
     }
 
     private fun calculateDistance(
+        context: Context,
         uri: Uri,
         texts: List<String>,
         from: Location,
@@ -70,7 +72,8 @@ class TextScannerViewModel @Inject constructor(
                             texts = texts,
                             display = PrettyDisplay(
                                 distance = DistanceUtils.prettyDistance(it.distanceInMeters),
-                                duration = DistanceUtils.prettyDuration(it.durationInSeconds)
+                                duration = DistanceUtils.prettyDuration(it.durationInSeconds),
+                                originalPlace = LocationUtils.getLocationName(context, from)
                             )
                         )
                     )

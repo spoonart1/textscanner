@@ -10,5 +10,6 @@ data class ResultData(
 
 data class PrettyDisplay(
     val distance:String,
-    val duration: String
+    val duration: String,
+    val originalPlace:String
 )
