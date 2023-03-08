@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "1039904411776",
+    "firebase_url": "https://spoonart-experiment-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "spoonart-experiment",
+    "storage_bucket": "spoonart-experiment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039904411776:android:1d5813994245f64dfe9665",
+        "android_client_info": {
+          "package_name": "com.spoonart.remote_database"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039904411776-bu780sj5i5vk77sm3hp1kajg2t021ev7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVzaQjKTUoXsJ6Oe8ZbhCPfT8YOK3WVVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039904411776-bu780sj5i5vk77sm3hp1kajg2t021ev7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039904411776:android:0a09d1c3acec660afe9665",
+        "android_client_info": {
+          "package_name": "com.spoonart.textscanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039904411776-bu780sj5i5vk77sm3hp1kajg2t021ev7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVzaQjKTUoXsJ6Oe8ZbhCPfT8YOK3WVVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039904411776-bu780sj5i5vk77sm3hp1kajg2t021ev7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
