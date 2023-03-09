@@ -80,7 +80,13 @@ class TextScannerActivity : ComponentActivity() {
                             }
                         }
 
-                        ResultView(viewModel)
+                        val resultData by viewModel.result.observeAsState()
+                        val error by viewModel.error.observeAsState()
+                        resultData?.let {
+                            ResultView(onBack = {
+                                viewModel.reset()
+                            }, data = it, error = error)
+                        }
                     }
                 }
             }

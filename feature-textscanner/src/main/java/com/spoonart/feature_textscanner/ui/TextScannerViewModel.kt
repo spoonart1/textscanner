@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import com.google.maps.model.LatLng
 import com.spoonart.feature_textscanner.data.PrettyDisplay
 import com.spoonart.feature_textscanner.data.ResultData
@@ -24,6 +25,8 @@ class TextScannerViewModel @Inject constructor(
     private val textAnalyzer: TextAnalyzer,
     private val remoteDatabase: RemoteDatabase
 ) : ViewModel() {
+
+    private val gson = Gson()
 
     private val _stateProgress = MutableLiveData<LoadingState>(LoadingState.Nothing)
     val stateProgress: LiveData<LoadingState> = _stateProgress
@@ -66,19 +69,27 @@ class TextScannerViewModel @Inject constructor(
                 origin = origin,
                 onResult = {
                     _stateProgress.postValue(LoadingState.Finish)
+                    val output = PrettyDisplay(
+                        distance = DistanceUtils.prettyDistance(it.distanceInMeters),
+                        duration = DistanceUtils.prettyDuration(it.durationInSeconds),
+                        originalPlace = LocationUtils.getLocationName(context, from)
+                    )
                     _result.postValue(
                         ResultData(
                             uri = uri,
                             texts = texts,
-                            display = PrettyDisplay(
-                                distance = DistanceUtils.prettyDistance(it.distanceInMeters),
-                                duration = DistanceUtils.prettyDuration(it.durationInSeconds),
-                                originalPlace = LocationUtils.getLocationName(context, from)
-                            )
+                            display = output
                         )
                     )
+                    sendData(output)
                 }
             )
+        }
+    }
+
+    private fun sendData(display: PrettyDisplay){
+        viewModelScope.launch(Dispatchers.IO) {
+            remoteDatabase.save(gson.toJson(display))
         }
     }
 
